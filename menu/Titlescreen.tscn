@@ -1,0 +1,110 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://graphic/fonts/PressStart2P.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://menu/Buttons.gd" type="Script" id=2]
+[ext_resource path="res://buttons/NewGameButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://buttons/Continue1Button.tscn" type="PackedScene" id=4]
+[ext_resource path="res://buttons/OptionsButton.tscn" type="PackedScene" id=5]
+[ext_resource path="res://graphic/enemy/grafik-1.png.png" type="Texture" id=6]
+[ext_resource path="res://graphic/FadeIn.tscn" type="PackedScene" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 50
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 0, 0.211765, 1 )
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Button
+
+func _ready():
+	self.grab_focus()
+
+"
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 1, 0, 0.211765, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 1, 0, 0.211765, 1 )
+
+[sub_resource type="DynamicFont" id=6]
+font_data = ExtResource( 1 )
+
+[node name="Titlescreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Menu" type="VBoxContainer" parent="."]
+margin_left = 120.0
+margin_top = 150.0
+margin_right = 1800.0
+margin_bottom = 1000.0
+
+[node name="Label" type="Label" parent="Menu"]
+margin_right = 1680.0
+margin_bottom = 50.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 0, 0.211765, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 10
+custom_constants/shadow_offset_y = 10
+text = "UNTITLED GODOT GAME"
+
+[node name="CenterRow" type="HBoxContainer" parent="Menu"]
+margin_top = 54.0
+margin_right = 1680.0
+margin_bottom = 450.0
+size_flags_vertical = 3
+
+[node name="Buttons" type="VBoxContainer" parent="Menu/CenterRow"]
+margin_right = 360.0
+margin_bottom = 396.0
+custom_constants/separation = 30
+alignment = 1
+script = ExtResource( 2 )
+
+[node name="NewGameButton" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
+margin_top = 78.0
+margin_right = 360.0
+margin_bottom = 138.0
+custom_styles/focus = SubResource( 2 )
+script = SubResource( 3 )
+
+[node name="ContinueButton" parent="Menu/CenterRow/Buttons" instance=ExtResource( 4 )]
+margin_top = 168.0
+margin_right = 360.0
+margin_bottom = 228.0
+custom_styles/focus = SubResource( 4 )
+
+[node name="OptionsButton" parent="Menu/CenterRow/Buttons" instance=ExtResource( 5 )]
+margin_top = 258.0
+margin_right = 360.0
+margin_bottom = 318.0
+custom_styles/focus = SubResource( 5 )
+
+[node name="VersionLabel" type="Label" parent="Menu"]
+margin_top = 454.0
+margin_right = 1680.0
+margin_bottom = 850.0
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Version 0.1 - By Diamon213"
+align = 2
+valign = 2
+
+[node name="grafik-1png" type="Sprite" parent="."]
+position = Vector2( 1500, 523.331 )
+scale = Vector2( 0.606668, 0.605863 )
+texture = ExtResource( 6 )
+
+[node name="FadeIn" parent="." instance=ExtResource( 7 )]
+visible = false
+[connection signal="pressed" from="Menu/CenterRow/Buttons/NewGameButton" to="Menu/CenterRow/Buttons" method="_on_NewGameButton_pressed"]
+[connection signal="pressed" from="Menu/CenterRow/Buttons/ContinueButton" to="Menu/CenterRow/Buttons" method="_on_ContinueButton_pressed"]
+[connection signal="pressed" from="Menu/CenterRow/Buttons/OptionsButton" to="Menu/CenterRow/Buttons" method="_on_OptionsButton_pressed"]
+[connection signal="fade_finished" from="FadeIn" to="Menu/CenterRow/Buttons" method="_on_FadeIn_fade_finished"]

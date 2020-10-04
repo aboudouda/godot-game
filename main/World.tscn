@@ -1,0 +1,304 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://entities/Player.gd" type="Script" id=1]
+[ext_resource path="res://graphic/player/New Piskel-1.png-1.png.png" type="Texture" id=2]
+[ext_resource path="res://entities/Fire_effect.gd" type="Script" id=3]
+[ext_resource path="res://entities/Hurtbox.gd" type="Script" id=4]
+[ext_resource path="res://graphic/enemy/icon.png" type="Texture" id=5]
+[ext_resource path="res://graphic/backgrounds/1456084862226.jpg" type="Texture" id=6]
+[ext_resource path="res://entities/Enemy.tscn" type="PackedScene" id=7]
+[ext_resource path="res://menu/PauseScreen.tscn" type="PackedScene" id=8]
+[ext_resource path="res://main/Lifebar.tscn" type="PackedScene" id=9]
+[ext_resource path="res://graphic/fonts/PressStart2P.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://main/Label.gd" type="Script" id=11]
+
+
+
+
+
+
+
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0.126374, 0.870879, 1 )
+colors = PoolColorArray( 1, 0.908142, 0.160156, 1, 1, 0.294398, 0.0519188, 1, 1, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+min_value = -200.0
+max_value = 400.0
+_data = [ Vector2( 0, 400 ), 0.0, 8546.99, 0, 0, Vector2( 0.131367, 100 ), -1158.13, -1158.13, 0, 0, Vector2( 0.998892, -32 ), 623.61, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="Curve" id=5]
+max_value = 2.5
+_data = [ Vector2( 0.00110789, 2.482 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.788 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+flag_disable_z = true
+spread = 65.0
+gravity = Vector3( -10000, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.5
+angular_velocity = 2.8026e-044
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 100.0
+linear_accel_random = 0.2
+linear_accel_curve = SubResource( 4 )
+scale = 5.0
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 2 )
+
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 1 )
+colors = PoolColorArray( 1, 0, 0.211765, 1 )
+
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
+
+[sub_resource type="Curve" id=10]
+min_value = -200.0
+max_value = 400.0
+_data = [ Vector2( 0, 400 ), 0.0, 8546.99, 0, 0, Vector2( 0.131367, 100 ), -1158.13, -1158.13, 0, 0, Vector2( 0.998892, -32 ), 623.61, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=11]
+curve = SubResource( 10 )
+
+[sub_resource type="Curve" id=12]
+max_value = 2.5
+_data = [ Vector2( 0.00110789, 2.482 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.788 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=13]
+curve = SubResource( 12 )
+
+[sub_resource type="ParticlesMaterial" id=14]
+emission_shape = 1
+emission_sphere_radius = 2.56
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.5
+angular_velocity = 2.8026e-044
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 100.0
+linear_accel_random = 0.2
+linear_accel_curve = SubResource( 11 )
+scale = 0.5
+scale_curve = SubResource( 13 )
+color_ramp = SubResource( 9 )
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="DynamicFont" id=16]
+size = 30
+font_data = ExtResource( 10 )
+
+[node name="World" type="Node"]
+
+[node name="Player" type="KinematicBody2D" parent="."]
+position = Vector2( 179.173, 553.099 )
+z_index = 500
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Player"]
+position = Vector2( -7, -7 )
+rotation = 1.5708
+scale = Vector2( 0.146376, 0.138672 )
+texture = ExtResource( 2 )
+
+[node name="Jetfire" type="Area2D" parent="Player"]
+position = Vector2( -30.8268, 0 )
+scale = Vector2( 0.440002, -0.52 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Particles2D" type="Particles2D" parent="Player/Jetfire"]
+scale = Vector2( 2.07477, 2.09306 )
+amount = 15
+lifetime = 0.15
+speed_scale = 0.3
+process_material = SubResource( 7 )
+
+[node name="Fire_effect1" type="Particles2D" parent="Player"]
+position = Vector2( 16.3573, -28.1026 )
+scale = Vector2( 2.07477, 2.09306 )
+amount = 5
+lifetime = 0.01
+speed_scale = 0.1
+explosiveness = 0.5
+process_material = SubResource( 14 )
+script = ExtResource( 3 )
+
+[node name="Fire_effect2" type="Particles2D" parent="Player"]
+position = Vector2( 16.3573, 27.8979 )
+scale = Vector2( 2.07477, 2.09306 )
+amount = 5
+lifetime = 0.01
+speed_scale = 0.1
+explosiveness = 0.5
+process_material = SubResource( 14 )
+script = ExtResource( 3 )
+
+[node name="CollisionBox" type="CollisionPolygon2D" parent="Player"]
+position = Vector2( 16, 30 )
+polygon = PoolVector2Array( -0.994232, 0.18866, -40.799, 0.689331, -40.5486, -4.0672, -31.7866, -4.31754, -31.7866, -8.82373, -27.2804, -9.07407, -27.5307, -13.3299, -23.5252, -13.8306, -23.0245, -18.0865, -31.7866, -18.0865, -31.7866, -22.5927, -40.799, -22.5927, -40.799, -18.0865, -49.3107, -18.0865, -49.3107, -22.5927, -44.8045, -23.0934, -45.0548, -28.1002, -41.0493, -27.5995, -41.0493, -32.1057, -44.8045, -32.1057, -45.0548, -37.1126, -49.8114, -37.1126, -49.561, -41.6188, -40.5486, -41.8692, -40.5486, -37.1126, -31.5362, -37.1126, -32.0369, -41.8692, -23.5252, -42.1195, -23.5252, -46.125, -27.5307, -46.125, -27.7811, -50.8816, -32.0369, -51.3823, -31.7866, -55.6381, -40.799, -55.3878, -40.5486, -60.3947, -0.994232, -60.1443, -0.819672, -55.8614, -18.5183, -55.8885, -18.5183, -51.1319, -14.2625, -50.8816, -14.2625, -46.876, -10.0066, -46.3754, -10.0066, -42.3699, -5.25008, -41.8692, -4.99973, -37.1126, 8.01407, -36.8649, 8.43277, -32.1546, 21.2031, -32.2592, 21.3077, -27.7582, 8.22342, -27.7582, 8.11874, -23.0479, -4.99973, -22.843, -4.78629, -18.399, -9.25558, -18.3368, -9.75627, -13.3299, -14.2625, -13.3299, -13.7618, -9.3244, -19.2693, -8.32306, -18.5183, -4.56787, -1.24457, -3.81683 )
+
+[node name="Hurtbox" type="Area2D" parent="Player"]
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D2" type="CollisionPolygon2D" parent="Player/Hurtbox"]
+position = Vector2( 16, 30 )
+polygon = PoolVector2Array( -0.994232, 0.18866, -40.799, 0.689331, -40.5486, -4.0672, -31.7866, -4.31754, -31.7866, -8.82373, -27.2804, -9.07407, -27.5307, -13.3299, -23.5252, -13.8306, -23.0245, -18.0865, -31.7866, -18.0865, -31.7866, -22.5927, -40.799, -22.5927, -40.799, -18.0865, -49.3107, -18.0865, -49.3107, -22.5927, -44.8045, -23.0934, -45.0548, -28.1002, -41.0493, -27.5995, -41.0493, -32.1057, -44.8045, -32.1057, -45.0548, -37.1126, -49.8114, -37.1126, -49.561, -41.6188, -40.5486, -41.8692, -40.5486, -37.1126, -31.5362, -37.1126, -32.0369, -41.8692, -23.5252, -42.1195, -23.5252, -46.125, -27.5307, -46.125, -27.7811, -50.8816, -32.0369, -51.3823, -31.7866, -55.6381, -40.799, -55.3878, -40.5486, -60.3947, -0.994232, -60.1443, -0.709488, -55.8614, -18.5183, -55.8885, -18.5183, -51.1319, -14.2625, -50.8816, -14.2625, -46.876, -10.0066, -46.3754, -10.0066, -42.3699, -5.25008, -41.8692, -4.99973, -37.1126, 8.01407, -36.8649, 8.43277, -32.1546, 21.2031, -32.2592, 21.3077, -27.7582, 8.22342, -27.7582, 8.11874, -23.0479, -4.99973, -22.843, -5.00665, -18.2888, -9.25558, -18.3368, -9.75627, -13.3299, -14.2625, -13.3299, -13.7618, -9.3244, -19.2693, -8.32306, -18.5183, -4.56787, -1.24457, -3.81683 )
+
+[node name="Wall" type="StaticBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( -180, 360 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Wall"]
+modulate = Color( 0.898039, 0, 1, 1 )
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+shape = SubResource( 15 )
+one_way_collision_margin = 0.0
+
+[node name="Wall5" type="StaticBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 930.008, 1084.5 )
+scale = Vector2( -33.9154, 0.999201 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall5"]
+shape = SubResource( 15 )
+one_way_collision_margin = 0.0
+
+[node name="Wall4" type="StaticBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 930.008, -2 )
+scale = Vector2( 35.96, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall4"]
+shape = SubResource( 15 )
+one_way_collision_margin = 0.0
+
+[node name="Wall3" type="StaticBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 1915.98, 576.553 )
+scale = Vector2( -0.771349, 22.3304 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall3"]
+shape = SubResource( 15 )
+one_way_collision_margin = 0.0
+
+[node name="Wall2" type="StaticBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( -3, 576.553 )
+scale = Vector2( 1, 21.16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
+shape = SubResource( 15 )
+one_way_collision_margin = 0.0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+editor/display_folded = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.5, 0.5 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground"]
+visible = false
+position = Vector2( 1155.06, 819.269 )
+scale = Vector2( 1.24282, 1.5068 )
+texture = ExtResource( 6 )
+
+[node name="Enemy" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1111.48, 175.311 )
+
+[node name="Enemy2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 930.008, 300 )
+
+[node name="Enemy3" parent="." instance=ExtResource( 7 )]
+position = Vector2( 833.821, 450 )
+
+[node name="Enemy4" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1237.79, 583.036 )
+
+[node name="Enemy5" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1486.5, 408.185 )
+
+[node name="Enemy6" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1510.62, 803.107 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseScreen" parent="CanvasLayer" instance=ExtResource( 8 )]
+visible = false
+
+[node name="Interface" type="Control" parent="."]
+margin_right = 1920.0
+margin_bottom = 120.0
+
+[node name="Bars" type="VBoxContainer" parent="Interface"]
+margin_left = -30.0
+margin_top = 19.0
+margin_right = 420.0
+margin_bottom = 139.0
+
+[node name="Lifebar" parent="Interface/Bars" instance=ExtResource( 9 )]
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 450.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Counters" type="HBoxContainer" parent="Interface"]
+margin_left = 1500.0
+margin_top = 30.0
+margin_right = 1890.0
+margin_bottom = 90.0
+
+[node name="Score" type="Label" parent="Interface/Counters"]
+margin_right = 390.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 16 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 5
+text = "100000000000"
+align = 2
+script = ExtResource( 11 )
+[connection signal="area_entered" from="Player/Hurtbox" to="Player/Hurtbox" method="_on_Hurtbox_area_entered"]
+[connection signal="hp_changed" from="Player/Hurtbox" to="Interface/Bars/Lifebar" method="_on_Hurtbox_hp_changed"]
+[connection signal="initialize_lifebar" from="Player/Hurtbox" to="Interface/Bars/Lifebar" method="_on_Hurtbox_initialize_lifebar"]
+[connection signal="show_cooldown" from="Player/Hurtbox" to="Interface/Bars/Lifebar" method="_on_Hurtbox_show_cooldown"]

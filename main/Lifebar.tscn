@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://main/Lifebar.gd" type="Script" id=1]
+[ext_resource path="res://graphic/fonts/PressStart2P.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://graphic/hp_fill.png" type="Texture" id=3]
+
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "shake"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Count/Number:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.02, 0.0394598, 0.0601051, 0.0799072, 0.0996435 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 150, 25 ), Vector2( 145, 25 ), Vector2( 155, 25 ), Vector2( 160, 25 ), Vector2( 165, 25 ), Vector2( 155, 25 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Count/Number:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+
+[node name="Lifebar" type="HBoxContainer"]
+margin_left = 31.0
+margin_top = 31.0
+margin_right = 630.0
+margin_bottom = 120.0
+script = ExtResource( 1 )
+
+[node name="Count" type="NinePatchRect" parent="."]
+margin_right = 78.0
+margin_bottom = 89.0
+size_flags_horizontal = 3
+
+[node name="Number" type="Label" parent="Count"]
+margin_left = 145.0
+margin_top = 25.0
+margin_right = 305.0
+margin_bottom = 41.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "HP 200/200"
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+show_behind_parent = true
+margin_left = 82.0
+margin_right = 599.0
+margin_bottom = 89.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.6
+max_value = 200.0
+value = 200.0
+texture_progress = ExtResource( 3 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/shake = SubResource( 2 )
